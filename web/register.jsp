@@ -7,10 +7,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Register User Page</title>
+        <title>Register Staff Page</title>
     </head>
     <body>
-
+        <h1>Login Staff</h1>
 
         <form action="RegisterServlet" method="POST">
             <div class="form-group">
