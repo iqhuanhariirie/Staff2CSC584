@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Edit Staff Page</title>
+        <title>Edit Department Page</title>
     </head>
     <body>
         <%
@@ -23,7 +23,7 @@
             DepartmentDao dao = new DepartmentDao();
             dept = dao.getDept(deptcode);
         %>
-        <h1>Edit Staff</h1>
+        <h1>Edit Department</h1>
 
         <form action="DeptController" method="POST">
             <table>
