@@ -4,23 +4,25 @@
  * and open the template in the editor.
  */
 package com.mvc.controller;
-
 import com.mvc.bean.Staff;
-import com.mvc.dao.StaffDao;
-import java.util.*;
+import com.mvc.dao.RegisterDao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.util.LinkedList;
+import java.util.List;
+import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Admin
  */
-public class StfController extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +41,10 @@ public class StfController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StfController</title>");
+            out.println("<title>Servlet RegisterServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet StfController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -74,31 +76,30 @@ public class StfController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            List errorMsgs = new LinkedList();
-            Staff stf = new Staff();
-            String stfID = request.getParameter("stfid");
+        try{
+        List errorMsgs = new LinkedList();
+            // get staff details from register.jsp page 
+           
+            String stfname = request.getParameter("stfname");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            String stfName = request.getParameter("stfname");
             String stfSalary = request.getParameter("stfsalary");
             String stfDesignation = request.getParameter("stfdesignation");
             String deptcode = request.getParameter("deptcode");
             String operation = request.getParameter("operation");
 
-            if (stfID == null) {
-                stfID = "0";
-            }
+            //creating object Staff
+            Staff staff = new Staff();
 
             // (e) do form validation
-            if (stfName == null || stfName.trim().length() == 0) {
-                errorMsgs.add("Please enter the staff name.");
+            if (stfname == null || stfname.trim().length() == 0) {
+                errorMsgs.add("Please enter your name.");
             }
             if (email == null || email.trim().length() == 0) {
-                errorMsgs.add("Please enter the staff email.");
+                errorMsgs.add("Please enter your email.");
             }
             if (password == null || password.trim().length() == 0) {
-                errorMsgs.add("Please enter the staff password.");
+                errorMsgs.add("Please enter your password.");
             }
             if (stfSalary == null || stfSalary.trim().length() == 0) {
                 errorMsgs.add("Please enter the staff salary.");
@@ -107,49 +108,36 @@ public class StfController extends HttpServlet {
                 errorMsgs.add("Please enter the designation.");
             }
 
-            // (f) dispatch to error.jsp. Refer Lab 7: Exercise 2, task 2
-            if (!errorMsgs.isEmpty()) {
-                request.setAttribute("errorMsgs", errorMsgs);
-                RequestDispatcher view = request.getRequestDispatcher("error.jsp");
-                view.forward(request, response);
-                return;
-            }
+            //setting staff details through the Staff object 
+           
+            staff.setStfname(stfname);
+            staff.setEmail(email);
+            staff.setPassword(password);
+            staff.setStfsalary(Double.parseDouble(stfSalary));
+            staff.setStfdesignation(stfDesignation);
+            staff.setDeptcode(deptcode);
+           
 
-            // (g) store entered data to staff object
-            stf.setStfid(Integer.parseInt(stfID));
-            stf.setStfname(stfName);
-            stf.setEmail(email);
-            stf.setPassword(password);
-            stf.setStfsalary(Double.parseDouble(stfSalary));
-            stf.setStfdesignation(stfDesignation);
-            stf.setDeptcode(deptcode);
+            // creating object for RegisterDao
+            RegisterDao registerDao = new RegisterDao();
 
-            if (operation.equals("C")) { //do create function
-                StaffDao dao = new StaffDao(); //create dao object
-                dao.addStaff(stf); //call addStaff() to insert data
-                request.setAttribute("staff", stf);
-                //(h) dispatch to success.jsp
-                RequestDispatcher view = request.getRequestDispatcher("success.jsp");
-                view.forward(request, response);
-            }
+            //The core Logic of the Registration application is present here. We are going to insert user data in to the database.
+            String userRegistered = registerDao.registerUser(staff);
 
-            // add more operation for update & delete
-            if(operation.equals("U")){
-                StaffDao dao = new StaffDao();
-                dao.updateStaff(stf);
-                request.setAttribute("staff", stf);
-                RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-                view.forward(request, response);
-            }
-            
-            if(operation.equals("D")){
-                int stfid = Integer.parseInt(request.getParameter("stfid"));
-                StaffDao dao = new StaffDao();
-                dao.deleteStaff(stfid);
-                
-                RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-                view.forward(request, response);
-            }
+            if (userRegistered.equals("SUCCESS")) //On success, you can display a message to user on Home page
+            {
+                HttpSession session = request.getSession(); //register session
+
+                //to set the attribute to the session 
+                session.setAttribute("stfname", stfname);
+                session.setAttribute("email", email);
+                request.getRequestDispatcher("successRegister.jsp").forward(request, response);
+            } 
+//            else //On Failure, display a meaningful message to the User.
+//            {
+//                request.setAttribute("errMessage", errorMsgs);
+//                request.getRequestDispatcher("registerError.jsp").forward(request, response);
+//            }
         } catch (Exception ex) {
             System.out.println(ex);
         }

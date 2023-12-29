@@ -10,8 +10,8 @@
         <h1>Login Staff</h1>
         <form action="LoginServlet" method="POST">
             <div class="form-group">
-                <label>Username:</label>
-                <input type="text" name="username" id="username">
+                <label>Email:</label>
+                <input type="text" name="email" id="email">
             </div>
             <div class="form-group">
                 <label>Password:</label>

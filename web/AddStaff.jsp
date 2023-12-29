@@ -24,6 +24,14 @@
                 <input type="text" name="stfname" id="stfname">
             </div>
             <div class="form-group">
+                <label>Email:</label>
+                <input type="text" name="email" id="email">
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="text" name="password" id="password">
+            </div>
+            <div class="form-group">
                 <label>Salary:</label>
                 <input type="text" name="stfsalary" id="stfsalary">
             </div>

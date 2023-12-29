@@ -11,13 +11,17 @@ import java.io.Serializable;
 public class Staff implements Serializable {
     private int stfid;
     private String stfname;
+    private String email;
+    private String password;
     private double stfsalary;
     private String stfdesignation;
     private String deptcode;
 
-    public Staff(int stfid, String stfname, double stfsalary, String stfdesignation, String deptcode) {
+    public Staff(int stfid, String stfname, String email, String password, double stfsalary, String stfdesignation, String deptcode) {
         this.stfid = stfid;
         this.stfname = stfname;
+        this.email = email;
+        this.password = password;
         this.stfsalary = stfsalary;
         this.stfdesignation = stfdesignation;
         this.deptcode = deptcode;
@@ -40,6 +44,22 @@ public class Staff implements Serializable {
 
     public void setStfname(String stfname) {
         this.stfname = stfname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public double getStfsalary() {

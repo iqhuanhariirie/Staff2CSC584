@@ -8,6 +8,14 @@
         <servlet-name>DeptController</servlet-name>
         <servlet-class>com.mvc.controller.DeptController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.mvc.controller.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.mvc.controller.LoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StfController</servlet-name>
         <url-pattern>/StfController</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>DeptController</servlet-name>
         <url-pattern>/DeptController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

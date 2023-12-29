@@ -5,6 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% //get userName attributes from session
+    String email = (String) session.getAttribute("email");
+    if (email == null) { //if null (user not login) redirect to login page 
+        request.setAttribute("errMessage", "You have not login");
+        out.println("<script> location.href='./login.jsp'; </script>");
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,6 +21,11 @@
     <body>
         <h1>Staff Management System</h1>
         
+        Welcome:
+        <span style="color: red">
+            <%=email %>
+        </span>
+        
         <ul>
             <li><a href="AddStaff.jsp">Add Staff</a></li>
             <li><a href="ListStaff.jsp">List Staff</a></li>
@@ -22,6 +34,9 @@
         <ul>
             <li><a href="AddDepartment.jsp">Add Department</a></li>
             <li><a href="ListDept.jsp">List Department</a></li>
+        </ul>
+        <ul>
+            <li><a href="register.jsp">Register</a></li>
         </ul>
     </body>
 </html>

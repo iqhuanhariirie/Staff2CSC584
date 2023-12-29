@@ -38,6 +38,14 @@
                     <td><input type="text" name="stfname" value="<%=stf.getStfname()%>" /></td>
                 </tr>
                 <tr>
+                    <td>Email:</td>
+                    <td><input type="text" name="email" value="<%=stf.getEmail() %>" /></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="text" name="password" value="<%=stf.getPassword() %>" /></td>
+                </tr>
+                <tr>
                     <td>Salary:</td>
                     <td><input type="text" name="stfsalary" value="<%=stf.getStfsalary()%>" /></td>
                 </tr>

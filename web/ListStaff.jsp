@@ -20,6 +20,7 @@
             <tr>
                 <th>Staff ID</th>
                 <th>Name</th>
+                <th>Email</th>
                 <th>Salary</th>
                 <th>Designation</th>
                 <th>Department</th>
@@ -39,6 +40,9 @@
 
                 <%--Get the staff name --%>
                 <td><%= rs.getString("stfname")%></td>
+                
+                <%--Get the staff email --%>
+                <td><%= rs.getString("email")%></td>
 
                 <%--Get the staff salary --%>
                 <td><%= rs.getDouble("stfsalary")%></td> 

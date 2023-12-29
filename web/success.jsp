@@ -15,6 +15,7 @@
 
         You have added the following Staff: <br/>
         Name: <%= stf.getStfname()%><br> 
+        Email: <%= stf.getEmail()%><br>
         Salary: <%= stf.getStfsalary()%><br> 
         Designation: <%= stf.getStfdesignation()%><br> 
         Department: <%= stf.getDeptcode()%><br> 
