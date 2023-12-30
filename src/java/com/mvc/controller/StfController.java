@@ -85,6 +85,12 @@ public class StfController extends HttpServlet {
             String stfDesignation = request.getParameter("stfdesignation");
             String deptcode = request.getParameter("deptcode");
             String operation = request.getParameter("operation");
+            String successMsg = "You have added the following: <br/>"
+                    + "Name: " + stfName + "<br/>"
+                    + "Email: " + email + "<br/>"
+                    + "Salary: " + stfSalary + "<br/>"
+                    + "Designation: " + stfDesignation + "<br/>"
+                    + "deptcode: " + deptcode;
 
             if (stfID == null) {
                 stfID = "0";
@@ -106,15 +112,12 @@ public class StfController extends HttpServlet {
             if (stfDesignation == null || stfDesignation.trim().length() == 0) {
                 errorMsgs.add("Please enter the designation.");
             }
-
-            // (f) dispatch to error.jsp. Refer Lab 7: Exercise 2, task 2
             if (!errorMsgs.isEmpty()) {
                 request.setAttribute("errorMsgs", errorMsgs);
-                RequestDispatcher view = request.getRequestDispatcher("error.jsp");
+                RequestDispatcher view = request.getRequestDispatcher("AddStaff.jsp");
                 view.forward(request, response);
                 return;
             }
-
             // (g) store entered data to staff object
             stf.setStfid(Integer.parseInt(stfID));
             stf.setStfname(stfName);
@@ -125,34 +128,37 @@ public class StfController extends HttpServlet {
             stf.setDeptcode(deptcode);
 
             if (operation.equals("C")) { //do create function
+
                 StaffDao dao = new StaffDao(); //create dao object
                 dao.addStaff(stf); //call addStaff() to insert data
                 request.setAttribute("staff", stf);
-                //(h) dispatch to success.jsp
-                RequestDispatcher view = request.getRequestDispatcher("success.jsp");
+                request.setAttribute("successMsg", successMsg);
+                RequestDispatcher view = request.getRequestDispatcher("AddStaff.jsp");
                 view.forward(request, response);
             }
 
             // add more operation for update & delete
-            if(operation.equals("U")){
+            if (operation.equals("U")) {
                 StaffDao dao = new StaffDao();
                 dao.updateStaff(stf);
                 request.setAttribute("staff", stf);
+
                 RequestDispatcher view = request.getRequestDispatcher("index.jsp");
                 view.forward(request, response);
             }
-            
-            if(operation.equals("D")){
+
+            if (operation.equals("D")) {
                 int stfid = Integer.parseInt(request.getParameter("stfid"));
                 StaffDao dao = new StaffDao();
                 dao.deleteStaff(stfid);
-                
+
                 RequestDispatcher view = request.getRequestDispatcher("index.jsp");
                 view.forward(request, response);
             }
         } catch (Exception ex) {
             System.out.println(ex);
         }
+
     }
 
     /**

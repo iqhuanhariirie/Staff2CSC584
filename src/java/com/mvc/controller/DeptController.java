@@ -81,6 +81,9 @@ public class DeptController extends HttpServlet {
             String deptcode = request.getParameter("deptcode");
             String deptName = request.getParameter("deptname");
             String operation = request.getParameter("operation");
+            String successMsg = "You have added the following: <br/>"+ 
+                                "Department code: "+ deptcode + "<br/>" +
+                                "Department name: "+ deptName + "<br/>";
             
             if (deptcode == null) {
                 deptcode = "";
@@ -97,7 +100,7 @@ public class DeptController extends HttpServlet {
             // (f) dispatch to error.jsp. Refer Lab 7: Exercise 2, task 2
             if (!errorMsgs.isEmpty()) {
                 request.setAttribute("errorMsgs", errorMsgs);
-                RequestDispatcher view = request.getRequestDispatcher("errorDept.jsp");
+                RequestDispatcher view = request.getRequestDispatcher("AddDepartment.jsp");
                 view.forward(request, response);
                 return;
             }
@@ -109,10 +112,10 @@ public class DeptController extends HttpServlet {
             if (operation.equals("CD")) { //do create function
                 DepartmentDao dao = new DepartmentDao(); //create dao object
                 dao.addDept(dept); //call addDepartment() to insert data
-
                 request.setAttribute("dept", dept);
+                request.setAttribute("successMsg", successMsg);
                 //(h) dispatch to success.jsp
-                RequestDispatcher view = request.getRequestDispatcher("successDept.jsp");
+                RequestDispatcher view = request.getRequestDispatcher("AddDepartment.jsp");
                 view.forward(request, response);
             }
 

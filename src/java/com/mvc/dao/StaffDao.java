@@ -79,10 +79,11 @@ public class StaffDao {
         int stfid = bean.getStfid();
         String stfname = bean.getStfname();
         String email = bean.getEmail();
+        String password = bean.getPassword();
         double stfsalary = bean.getStfsalary();
         String stfdesignation = bean.getStfdesignation();
         String deptcode = bean.getDeptcode();
-        String sql = "UPDATE staff SET stfname = ?, email = ?, stfsalary = ?, stfdesignation = ?, deptcode = ? WHERE stfid = ?;";
+        String sql = "UPDATE staff SET stfname = ?, email = ?, password = ?, stfsalary = ?, stfdesignation = ?, deptcode = ? WHERE stfid = ?;";
                 
 
         PreparedStatement ps;
@@ -91,10 +92,11 @@ public class StaffDao {
             ps = con.prepareStatement(sql);
             ps.setString(1, stfname);
             ps.setString(2, email);
-            ps.setDouble(3, stfsalary);
-            ps.setString(4, stfdesignation);
-            ps.setString(5, deptcode);
-            ps.setInt(6, stfid);
+            ps.setString(3, password);
+            ps.setDouble(4, stfsalary);
+            ps.setString(5, stfdesignation);
+            ps.setString(6, deptcode);
+            ps.setInt(7, stfid);
 
             ps.executeUpdate();
             con.close();

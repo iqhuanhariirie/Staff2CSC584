@@ -10,36 +10,39 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Delete Department Page</title>
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     </head>
     <body>
-        <%
-            String deptcode = request.getParameter("deptcode");
-            Department dept;
-            DepartmentDao dao = new DepartmentDao();
-            dept = dao.getDept(deptcode);
-        %>
-        <h1>Delete Department</h1>
+        <div class="container">
+            <%
+                String deptcode = request.getParameter("deptcode");
+                Department dept;
+                DepartmentDao dao = new DepartmentDao();
+                dept = dao.getDept(deptcode);
+            %>
+            <h1 class="text-center">Delete Department</h1>
 
-        <form action="DeptController" method="POST">
-            <table>
-                <tr>
-                    <td>Department code:</td>
-                    <td><input type="text" name="deptcode" value="<%= dept.getDeptcode()%>" /></td>
-                </tr>
-                <tr>
-                    <td>Department name:</td>
-                    <td><input type="text" name="deptname" value="<%= dept.getDeptname()%>" /></td>
-                </tr>
-                <tr>
-                    <td><input type="hidden" name="operation" value="DD" />
-                        <input type="hidden" name="deptcode" value="<%= dept.getDeptcode()%>" />
+            <form action="DeptController" method="POST">
+                <input type="hidden" name="operation" value="DD">
+                <input type="hidden" name="deptcode" value="<%= dept.getDeptcode()%>">
+                <div class="form-group">
+                    <label for="deptcode">Department code:</label>
+                    <input type="text" class="form-control" name="deptcode" id="deptcode" value="<%= dept.getDeptcode()%>">
+                </div>
+                <div class="form-group">
+                    <label for="deptname">Department name:</label>
+                    <input type="text" class="form-control" name="deptname" id="deptname" value="<%= dept.getDeptname()%>">
+                </div>
 
-                    </td>
-                    <td ><input type="submit" value="Delete" /> 
-                </tr>
-
-            </table>
-        </form>
-
+                <button type="submit" class="btn btn-danger">Delete</button>
+                
+            </form>
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </body>
 </html>
+
