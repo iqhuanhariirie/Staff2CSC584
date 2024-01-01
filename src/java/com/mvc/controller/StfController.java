@@ -151,7 +151,6 @@ public class StfController extends HttpServlet {
                 int stfid = Integer.parseInt(request.getParameter("stfid"));
                 StaffDao dao = new StaffDao();
                 dao.deleteStaff(stfid);
-
                 RequestDispatcher view = request.getRequestDispatcher("index.jsp");
                 view.forward(request, response);
             }

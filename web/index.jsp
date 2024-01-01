@@ -45,7 +45,9 @@
                 <div class="col-md-4">
                     <h2>Other</h2>
                     <ul class="list-group">
-                        <li class="list-group-item"><a href="register.jsp">Register</a></li>
+                        
+                        <li class="list-group-item"><a href="./LogoutServlet">Logout</a></li>
+                        
                     </ul>
                 </div>
             </div>

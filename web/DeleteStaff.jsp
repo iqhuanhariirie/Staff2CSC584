@@ -1,4 +1,5 @@
 
+<%@page import="java.util.List"%>
 <%@page import="com.mvc.dao.StaffDao"%>
 <%@page import="com.mvc.bean.Staff"%>
 <%@page import="java.sql.*"%>
@@ -28,13 +29,21 @@
                 stf = dao.getStaff(stfid);
             %>
             <h1 class="text-center">Delete Staff</h1>
-
+            
             <form action="StfController" method="POST">
                 <input type="hidden" name="operation" value="D">
                 <input type="hidden" name="stfid" value="<%=stf.getStfid()%>">
                 <div class="form-group">
                     <label for="stfname">Name:</label>
                     <input type="text" class="form-control" name="stfname" id="stfname" value="<%=stf.getStfname()%>">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" name="email" id="email" value="<%=stf.getEmail()%>">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="text" class="form-control" name="password" id="password" value="<%=stf.getPassword()%>">
                 </div>
                 <div class="form-group">
                     <label for="stfsalary">Salary:</label>
