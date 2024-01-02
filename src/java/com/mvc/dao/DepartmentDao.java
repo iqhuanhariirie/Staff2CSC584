@@ -82,16 +82,16 @@ public class DepartmentDao {
 
     public void deleteDept(String deptcode) {
         PreparedStatement ps;
-//        String sql1 = "update staff set deptcode = null where deptcode = ?";
-//
-//        try {
-//            ps = con.prepareStatement(sql1);
-//            ps.setString(1, deptcode);
-//            ps.executeUpdate();
+        String sql1 = "update staff set deptcode = null where deptcode = ?";
+
+        try {
+            ps = con.prepareStatement(sql1);
+            ps.setString(1, deptcode);
+            ps.executeUpdate();
 //            con.close();
-//        } catch (Exception ex) {
-//            System.out.println(ex);
-//        }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
         String sql = "delete from department where deptcode = ?";
         try {
             ps = con.prepareStatement(sql);
